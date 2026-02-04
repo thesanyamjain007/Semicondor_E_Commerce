@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Collections - S C Store Semiconductors{% endblock %}
+
+{% block content %}
+<h1>Our Collections</h1>
+<p>Browse our extensive range of semiconductor products.</p>
+
+<div class="grid" style="margin-top: 2rem;">
+    {% for product in products %}
+    <div class="card">
+        {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 100%; border-radius: 8px;">
+        {% endif %}
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description|truncatewords:20 }}</p>
+        <p style="color: var(--primary-color); font-weight: bold; font-size: 1.2rem;">${{ product.price }}</p>
+        <p>Stock: {{ product.stock }}</p>
+        <a href="{% url 'user_products' %}" class="btn">View Details</a>
+    </div>
+    {% empty %}
+    <p>No products available in the collection yet. Stay tuned!</p>
+    {% endfor %}
+</div>
+{% endblock %}

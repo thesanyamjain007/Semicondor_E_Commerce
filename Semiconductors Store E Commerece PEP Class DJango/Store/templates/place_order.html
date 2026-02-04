@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Place Order - {{ product.name }}{% endblock %}
+
+{% block content %}
+<h1>Confirm Order</h1>
+<div class="grid" style="margin-top: 2rem;">
+    <div class="card">
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+        <p>Price per unit: ${{ product.price }}</p>
+        <p>In Stock: {{ product.stock }}</p>
+    </div>
+    <div class="card">
+        <form method="POST" style="display: flex; flex-direction: column; gap: 1.5rem;">
+            {% csrf_token %}
+            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <label for="quantity">Quantity</label>
+                <input type="number" name="quantity" id="quantity" value="1" min="1" max="{{ product.stock }}"
+                    style="padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid var(--primary-color); color: white;">
+            </div>
+            <button type="submit" class="btn">Authorize Purchase</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

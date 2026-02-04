@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - S C Store Semiconductors{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 500px; margin: 4rem auto;">
+    <h2>Access the Grid</h2>
+    <p>Sign in to manage your semiconductor orders.</p>
+    <form method="POST" style="display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem;">
+        {% csrf_token %}
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <label for="id_username">Username</label>
+            <input type="text" name="username" id="id_username" required>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <label for="id_password">Password</label>
+            <input type="password" name="password" id="id_password" required>
+        </div>
+        <button type="submit" class="btn">Login</button>
+    </form>
+    <p style="margin-top: 1rem;">Don't have an account? <a href="{% url 'user_registration' %}"
+            style="color: var(--primary-color);">Register here</a></p>
+</div>
+
+<style>
+    input {
+        padding: 0.8rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        border-radius: 4px;
+    }
+
+    input:focus {
+        border-color: var(--primary-color);
+        outline: none;
+    }
+</style>
+{% endblock %}

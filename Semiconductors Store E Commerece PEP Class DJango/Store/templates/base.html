@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}S C Store - Semiconductors{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="{% url 'home' %}" style="font-size: 1.5rem; color: var(--primary-color);">S C Store</a>
+        </div>
+        <div class="nav-links">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'collections' %}">Collections</a>
+            <a href="{% url 'about' %}">About</a>
+            <a href="{% url 'contact' %}">Contact</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'user_products' %}">Shop</a>
+            <a href="{% url 'my_orders' %}">My Orders</a>
+            {% if user.is_staff %}
+            <a href="{% url 'admin_view_users' %}" style="color: var(--accent-color);">Admin Panel</a>
+            {% endif %}
+            <a href="{% url 'user_logout' %}">Logout</a>
+            {% else %}
+            <a href="{% url 'user_login' %}">Login</a>
+            <a href="{% url 'user_registration' %}">Register</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; 2026 S C Store Semiconductors. Future is here.</p>
+    </footer>
+</body>
+
+</html>

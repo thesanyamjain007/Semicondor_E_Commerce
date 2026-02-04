@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Register - S C Store Semiconductors{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 500px; margin: 4rem auto;">
+    <h2>Join the Future</h2>
+    <p>Create your account to start ordering semiconductor components.</p>
+    <form method="POST" style="display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem;">
+        {% csrf_token %}
+        {% for field in form %}
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.errors %}
+            <small style="color: var(--accent-color);">{{ field.errors.0 }}</small>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn">Register</button>
+    </form>
+    <p style="margin-top: 1rem;">Already have an account? <a href="{% url 'user_login' %}"
+            style="color: var(--primary-color);">Login here</a></p>
+</div>
+
+<style>
+    input {
+        padding: 0.8rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        border-radius: 4px;
+    }
+
+    input:focus {
+        border-color: var(--primary-color);
+        outline: none;
+    }
+</style>
+{% endblock %}

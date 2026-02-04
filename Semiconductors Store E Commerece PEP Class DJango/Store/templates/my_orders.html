@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}My Orders - S C Store Semiconductors{% endblock %}
+
+{% block content %}
+<h1>Your Order History</h1>
+<div style="margin-top: 2rem;">
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="text-align: left; border-bottom: 2px solid var(--primary-color);">
+                <th style="padding: 1rem;">Order ID</th>
+                <th style="padding: 1rem;">Product</th>
+                <th style="padding: 1rem;">Quantity</th>
+                <th style="padding: 1rem;">Status</th>
+                <th style="padding: 1rem;">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                <td style="padding: 1rem;">#{{ order.id }}</td>
+                <td style="padding: 1rem;">{{ order.product.name }}</td>
+                <td style="padding: 1rem;">{{ order.quantity }}</td>
+                <td style="padding: 1rem;">
+                    <span
+                        style="padding: 0.2rem 0.5rem; border-radius: 4px; background: {% if order.status == 'Pending' %}#d4af37{% elif order.status == 'Delivered' %}#228b22{% else %}#444{% endif %};">
+                        {{ order.status }}
+                    </span>
+                </td>
+                <td style="padding: 1rem;">{{ order.date_ordered|date:"F j, Y" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" style="padding: 2rem; text-align: center;">You have no orders yet. <a
+                        href="{% url 'user_products' %}" style="color: var(--primary-color);">Start shopping!</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

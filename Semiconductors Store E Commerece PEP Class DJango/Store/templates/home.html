@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - S C Store Semiconductors{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="hero"
+    style="text-align: center; padding: 5rem 0; background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url('{% static 'images/hero_semiconductor_light.png' %}'); background-size: cover; background-position: center; border-radius: 20px; margin-bottom: 2rem;">
+    <h1 style="font-size: 4rem; margin-bottom: 1rem;">Powering the Next <span
+            style="color: var(--accent-color);">Revolution</span></h1>
+    <p
+        style="font-size: 1.2rem; max-width: 800px; margin: 0 auto 2rem; background: rgba(255,255,255,0.5); padding: 10px; border-radius: 10px;">
+        Discover the most advanced semiconductor components for your next-generation projects. From high-performance
+        microcontrollers to specialized sensors.</p>
+    <a href="{% url 'collections' %}" class="btn">Explore Collections</a>
+</div>
+
+<h2 style="margin-top: 4rem;">Featured Categories</h2>
+<div class="grid">
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=600"
+            alt="Microprocessors" class="category-img">
+        <h3>Microprocessors</h3>
+        <p>Ultra-efficient processing units for high-compute tasks.</p>
+    </div>
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=600"
+            alt="Power ICs" class="category-img">
+        <h3>Power ICs</h3>
+        <p>Reliable power management solutions for modern electronics.</p>
+    </div>
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?auto=format&fit=crop&q=80&w=600"
+            alt="Sensors" class="category-img">
+        <h3>Sensors</h3>
+        <p>High-precision sensors for automotive and industrial IoT.</p>
+    </div>
+</div>
+{% endblock %}

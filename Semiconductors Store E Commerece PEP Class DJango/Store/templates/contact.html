@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Us - S C Store Semiconductors{% endblock %}
+
+{% block content %}
+<h1>Contact Our Team</h1>
+<div class="grid" style="margin-top: 2rem;">
+    <div class="card">
+        <h3>Get in Touch</h3>
+        <p>Email: contact@scstore.tech</p>
+        <p>Phone: +1 (555) NEO-CHIP</p>
+        <p>Address: 101 Silicon Valley Dr, CA</p>
+    </div>
+    <div class="card">
+        <form style="display: flex; flex-direction: column; gap: 1rem;">
+            <input type="text" placeholder="Your Name"
+                style="padding: 0.8rem; background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-color);">
+            <input type="email" placeholder="Your Email"
+                style="padding: 0.8rem; background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-color);">
+            <textarea placeholder="Your Message" rows="5"
+                style="padding: 0.8rem; background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-color);"></textarea>
+            <button type="submit" class="btn">Send Signal</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

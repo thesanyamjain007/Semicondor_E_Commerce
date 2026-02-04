@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Users - Admin Panel{% endblock %}
+
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <h1>User Directory</h1>
+    <a href="{% url 'admin_add_product' %}" class="btn">Add New Product</a>
+</div>
+
+<div style="margin-top: 2rem;">
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="text-align: left; border-bottom: 2px solid var(--primary-color);">
+                <th style="padding: 1rem;">ID</th>
+                <th style="padding: 1rem;">Username</th>
+                <th style="padding: 1rem;">Email</th>
+                <th style="padding: 1rem;">Staff Status</th>
+                <th style="padding: 1rem;">Date Joined</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                <td style="padding: 1rem;">#{{ user.id }}</td>
+                <td style="padding: 1rem;">{{ user.username }}</td>
+                <td style="padding: 1rem;">{{ user.email|default:"N/A" }}</td>
+                <td style="padding: 1rem;">
+                    {% if user.is_staff %}
+                    <span style="color: var(--accent-color); font-weight: bold;">ADMIN</span>
+                    {% else %}
+                    <span>User</span>
+                    {% endif %}
+                </td>
+                <td style="padding: 1rem;">{{ user.date_joined|date:"M d, Y" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Sale Report - Admin Panel{% endblock %}
+
+{% block content %}
+<h1>Revenue & Performance Analysis</h1>
+
+<div class="grid" style="margin-top: 2rem;">
+    <div class="card" style="text-align: center;">
+        <h3>Total Orders (Delivered)</h3>
+        <p style="font-size: 3rem; color: var(--primary-color);">{{ total_sales }}</p>
+    </div>
+    <div class="card" style="text-align: center;">
+        <h3>Gross Revenue</h3>
+        <p style="font-size: 3rem; color: var(--accent-color);">${{ total_revenue }}</p>
+    </div>
+</div>
+
+<h2 style="margin-top: 3rem;">Successful Transactions</h2>
+<div style="margin-top: 1rem;">
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="text-align: left; border-bottom: 2px solid var(--primary-color);">
+                <th style="padding: 1rem;">Order ID</th>
+                <th style="padding: 1rem;">Customer</th>
+                <th style="padding: 1rem;">Product</th>
+                <th style="padding: 1rem;">Date</th>
+                <th style="padding: 1rem;">Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                <td style="padding: 1rem;">#{{ order.id }}</td>
+                <td style="padding: 1rem;">{{ order.user.username }}</td>
+                <td style="padding: 1rem;">{{ order.product.name }}</td>
+                <td style="padding: 1rem;">{{ order.date_ordered|date:"Y-m-d" }}</td>
+                <td style="padding: 1rem;">${{ order.product.price|floatformat:2 }} x {{ order.quantity }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Product Catalog - S C Store Semiconductors{% endblock %}
+
+{% block content %}
+<h1>Semiconductor Catalog</h1>
+<p>Modern silicon for every need.</p>
+
+<div class="grid" style="margin-top: 2rem;">
+    {% for product in products %}
+    <div class="card">
+        {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 100%; border-radius: 8px;">
+        {% endif %}
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+        <p style="color: var(--primary-color); font-weight: bold; font-size: 1.2rem;">${{ product.price }}</p>
+        <p>Availability: <span style="color: {% if product.stock > 0 %}#00ff00{% else %}#ff0000{% endif %};">{{
+                product.stock }} in stock</span></p>
+        {% if product.stock > 0 %}
+        <a href="{% url 'place_order' product.id %}" class="btn">Place Order</a>
+        {% else %}
+        <button class="btn" disabled style="opacity: 0.5; cursor: not-allowed;">Out of Stock</button>
+        {% endif %}
+    </div>
+    {% empty %}
+    <p>The catalog is currently empty.</p>
+    {% endfor %}
+</div>
+{% endblock %}

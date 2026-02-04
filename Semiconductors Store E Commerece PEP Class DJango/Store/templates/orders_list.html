@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Orders - Admin Panel{% endblock %}
+
+{% block content %}
+<h1>Global Order Registry</h1>
+<div style="margin-top: 2rem;">
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="text-align: left; border-bottom: 2px solid var(--primary-color);">
+                <th style="padding: 1rem;">ID</th>
+                <th style="padding: 1rem;">User</th>
+                <th style="padding: 1rem;">Product</th>
+                <th style="padding: 1rem;">Quantity</th>
+                <th style="padding: 1rem;">Status</th>
+                <th style="padding: 1rem;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                <td style="padding: 1rem;">#{{ order.id }}</td>
+                <td style="padding: 1rem;">{{ order.user.username }}</td>
+                <td style="padding: 1rem;">{{ order.product.name }}</td>
+                <td style="padding: 1rem;">{{ order.quantity }}</td>
+                <td style="padding: 1rem;">
+                    <span style="padding: 0.2rem 0.5rem; border-radius: 4px; background: #333;">{{ order.status
+                        }}</span>
+                </td>
+                <td style="padding: 1rem;">
+                    <form method="POST" style="display: flex; gap: 0.5rem;">
+                        {% csrf_token %}
+                        <input type="hidden" name="order_id" value="{{ order.id }}">
+                        <select name="status"
+                            style="padding: 0.3rem; background: black; color: white; border: 1px solid var(--primary-color);">
+                            <option value="Pending" {% if order.status=='Pending' %}selected{% endif %}>Pending</option>
+                            <option value="Shipped" {% if order.status=='Shipped' %}selected{% endif %}>Shipped</option>
+                            <option value="Delivered" {% if order.status=='Delivered' %}selected{% endif %}>Delivered
+                            </option>
+                            <option value="Cancelled" {% if order.status=='Cancelled' %}selected{% endif %}>Cancelled
+                            </option>
+                        </select>
+                        <button type="submit" class="btn"
+                            style="padding: 0.3rem 0.6rem; font-size: 0.8rem;">Update</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
